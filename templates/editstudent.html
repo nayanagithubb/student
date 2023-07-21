@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    body{
+        background-color: rgb(241, 224, 248);
+        background-image: url("https://sun.ac.jp/files/libs/41705/t/202103011214344781.jpg?1614568478");
+        background-repeat: no-repeat;
+        background-size: cover;
+        
+    }
+    h1{
+        color: rgb(56, 15, 240);
+    }
+    .demo{
+        color: rgba(212, 14, 64, 0.966);
+    }
+   
+</style>
+<body>
+    
+   
+        <br> 
+        <div class="container text-align-center"> 
+            <div class="card" style="width: 23rem; background-color: rgb(228, 209, 235);">
+          <h1>Edit Student Details</h1><br>
+    
+<form action="{% url 'editstudentdetails' students.id %}" method="post"  class="demo">
+    {% csrf_token %}
+   
+<table>
+    <tr> 
+        <td><label>Student Name</label></td>
+        <td><input type="text" name="sname" value="{{students.StudentName}}"></td>
+        </tr>
+    
+    <tr> 
+        <td><label>Address </label></td>
+        <td><input type="text" name="address" value="{{students.Address}}"></td>
+        </tr>
+
+    <tr>
+        <td><label>Age</label></td>
+        <td><input type="number" name="age" value="{{students.Age}}"></td>
+        </tr>
+
+
+    <tr>
+       <td><label>Email ID</label></td>
+       <td><input type="email" name="emailid"value="{{students.EmailID}}" ></td>
+       </tr>
+    
+
+
+    <tr>
+       <td><label>Joining Date</label></td>
+       <td><input type="date" name="joiningdate" value="{{students.JoiningDate|date:'Y-m-d'}}"></td>
+       </tr>
+   
+
+    <tr>
+       <td><label>Qualification</label></td>
+    <td>
+    <select name="qualification">
+        {% for i in q %}
+        {% if i.Qualification == students.Qualification %}
+        <option value="{{i.Qualification}}" selected>{{i.Qualification}}</option>
+        {% else %}
+
+        <option value="{{i.Qualification}}" >{{i.Qualification}}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+    </td>
+    </tr>
+
+    <tr>
+        <td><label>Gender</label></td>
+        <td>
+            <input type="radio" name="gender" value="Male" {% if students.Gender == 'Male' %}checked{% endif %}>Male<br>
+            <input type="radio" name="gender" value="Female" {% if students.Gender == 'Female' %}checked{% endif %}>Female
+        </td>
+    </tr>
+
+    <tr>
+        <td><label>Mobile Number</label></td>
+        <td><input type="text" name="mobilenumber" value="{{students.MobileNumber}}"></td>
+    </tr>
+    <tr>
+        
+        <td>
+            <input type="submit" value="Update" style="background-color: rgb(138, 218, 142); color: rgb(11, 46, 202);">
+        </td>
+    </tr>
+
+    
+    
+   
+</table>
+
+</form>
+</div>
+</div>
+{% block content %}
+{% endblock %}
+</body>
+</html>
